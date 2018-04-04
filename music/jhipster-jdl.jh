@@ -1,0 +1,15 @@
+entity PlayList {
+	name String
+}
+
+entity Track {
+	name String
+	album String
+	artist String
+	images_url String
+	preview_url String
+}
+
+relationship ManyToMany {
+	PlayList{track} to Track{playlist}
+}

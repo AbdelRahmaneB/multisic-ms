@@ -1,0 +1,41 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipType": "many-to-many",
+            "relationshipName": "playlist",
+            "otherEntityName": "playList",
+            "ownerSide": false,
+            "otherEntityRelationshipName": "track"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "name",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "album",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "artist",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "imagesurl",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "previewurl",
+            "fieldType": "String"
+        }
+    ],
+    "changelogDate": "20180404172635",
+    "entityTableName": "track",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "microserviceName": "music"
+}
