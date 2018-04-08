@@ -25,14 +25,12 @@ public class PlayList implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @JsonSerialize(using = ToStringSerializer.class)
     private Long id;
 
     @Column(name = "name")
     private String name;
 
-//    @ManyToMany
     @ManyToMany(cascade = CascadeType.ALL)
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @JoinTable(name = "play_list_track",
@@ -44,7 +42,6 @@ public class PlayList implements Serializable {
         this.id = UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;
     }
     
-    // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
         return id;
     }
@@ -90,7 +87,6 @@ public class PlayList implements Serializable {
     public void setTracks(Set<Track> tracks) {
         this.tracks = tracks;
     }
-    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
     @Override
     public boolean equals(Object o) {

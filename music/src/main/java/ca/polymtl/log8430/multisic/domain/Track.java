@@ -1,19 +1,16 @@
 package ca.polymtl.log8430.multisic.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
+
+import ca.polymtl.log8430.multisic.model.domain.TrackModel;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
 
-import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.UUID;
-import java.util.Objects;
 
 /**
  * A Track.
@@ -21,121 +18,52 @@ import java.util.Objects;
 @Entity
 @Table(name = "track")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-public class Track implements Serializable {
-
-    private static final long serialVersionUID = 1L;
+public class Track extends TrackModel{
+    
+	@JsonIgnore
+    private Set<PlayList> playlists = new HashSet<>();
 
     @Id
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @JsonSerialize(using = ToStringSerializer.class)
-    private Long id;
-
-    @Column(name = "name")
-    private String name;
-
-    @Column(name = "album")
-    private String album;
-
-    @Column(name = "artist")
-    private String artist;
-
-    @Column(name = "imagesurl")
-    private String imagesurl;
-
-    @Column(name = "previewurl")
-    private String previewurl;
-
-//    @ManyToMany(mappedBy = "tracks")
-//    @JsonIgnore
-//    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-//    private Set<PlayList> playlists = new HashSet<>();
-    
-    @ManyToMany(cascade = { CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.PERSIST })
-    @JsonIgnore
-    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    @JoinTable(name = "play_list_track",
-                inverseJoinColumns = @JoinColumn(name="play_lists_id", referencedColumnName="id"),
-                joinColumns = @JoinColumn(name="tracks_id", referencedColumnName="id"))
-    private Set<PlayList> playlists = new HashSet<>();
-    
-    public Track() {
-        this.id = UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;
-    }
-
-    // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
+    @Override
     public Long getId() {
-        return id;
+    	return this.id;
     }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
+    
+    @Column(name = "name")
+    @Override
     public String getName() {
         return name;
     }
 
-    public Track name(String name) {
-        this.name = name;
-        return this;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
+    @Column(name = "album")
+    @Override
     public String getAlbum() {
         return album;
     }
 
-    public Track album(String album) {
-        this.album = album;
-        return this;
-    }
-
-    public void setAlbum(String album) {
-        this.album = album;
-    }
-
+    @Column(name = "artist")
+    @Override
     public String getArtist() {
         return artist;
     }
 
-    public Track artist(String artist) {
-        this.artist = artist;
-        return this;
-    }
-
-    public void setArtist(String artist) {
-        this.artist = artist;
-    }
-
+    @Column(name = "imagesurl")
+    @Override
     public String getImagesurl() {
         return imagesurl;
     }
 
-    public Track imagesurl(String imagesurl) {
-        this.imagesurl = imagesurl;
-        return this;
-    }
-
-    public void setImagesurl(String imagesurl) {
-        this.imagesurl = imagesurl;
-    }
-
+    @Column(name = "previewurl")
+    @Override
     public String getPreviewurl() {
         return previewurl;
     }
 
-    public Track previewurl(String previewurl) {
-        this.previewurl = previewurl;
-        return this;
-    }
-
-    public void setPreviewurl(String previewurl) {
-        this.previewurl = previewurl;
-    }
-
+    @ManyToMany(cascade = { CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.PERSIST })
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    @JoinTable(name = "play_list_track",
+                inverseJoinColumns = @JoinColumn(name="play_lists_id", referencedColumnName="id"),
+                joinColumns = @JoinColumn(name="tracks_id", referencedColumnName="id"))
     public Set<PlayList> getPlaylists() {
         return playlists;
     }
@@ -160,37 +88,5 @@ public class Track implements Serializable {
     public void setPlaylists(Set<PlayList> playLists) {
         this.playlists = playLists;
     }
-    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        Track track = (Track) o;
-        if (track.getId() == null || getId() == null) {
-            return false;
-        }
-        return Objects.equals(getId(), track.getId());
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hashCode(getId());
-    }
-
-    @Override
-    public String toString() {
-        return "Track{" +
-            "id=" + getId() +
-            ", name='" + getName() + "'" +
-            ", album='" + getAlbum() + "'" +
-            ", artist='" + getArtist() + "'" +
-            ", imagesurl='" + getImagesurl() + "'" +
-            ", previewurl='" + getPreviewurl() + "'" +
-            "}";
-    }
 }
