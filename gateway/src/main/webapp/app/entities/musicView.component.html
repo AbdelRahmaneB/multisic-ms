@@ -1,0 +1,17 @@
+<div class="row">
+    <div class="col-md-4 col-sm-5">
+        <jhi-music-sidebar [playLists]="playLists" (getPlaylistChange)="changePlaylist($event)" (getIsSearchMusic)="browseMusic($event)"></jhi-music-sidebar>
+    </div>
+    <div class="col-md-8 col-sm-7 playlistView">
+        <div [ngClass]="{hide: !isSearchMusicSelected}">
+            <jhi-search-music-view (newTrack)=selectTrack($event)></jhi-search-music-view>
+        </div>
+        <div [ngClass]="{hide: !selectedPlaylist}">
+            <jhi-playlist-view [playlist]="selectedPlaylist" (newTrack)=selectTrack($event) (getIsSearchMusic)="browseMusic($event)"></jhi-playlist-view>
+        </div>
+    </div>
+</div>
+
+<div class="audio-container">
+    <jhi-audio-player [selectedPlaylist]="selectedPlaylist"></jhi-audio-player>
+</div>

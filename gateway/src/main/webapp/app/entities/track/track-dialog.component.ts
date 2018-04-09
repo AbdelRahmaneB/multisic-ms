@@ -9,7 +9,7 @@ import { JhiEventManager, JhiAlertService } from 'ng-jhipster';
 import { Track } from './track.model';
 import { TrackPopupService } from './track-popup.service';
 import { TrackService } from './track.service';
-import { PlayList, PlayListService } from '../play-list';
+import { PlayList, PlayListService } from '../music-sidebar';
 
 @Component({
     selector: 'jhi-track-dialog',

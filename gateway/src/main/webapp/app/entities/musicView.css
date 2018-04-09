@@ -1,0 +1,17 @@
+.playlistView {
+    padding: 0 25px;
+}
+
+.hide {
+    visibility: hidden;
+    height: 0;
+}
+
+.audio-container {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(103, 103, 105, 0.75);
+    padding: 5px 15px;
+}

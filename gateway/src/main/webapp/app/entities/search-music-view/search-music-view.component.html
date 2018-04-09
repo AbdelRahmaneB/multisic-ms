@@ -1,0 +1,54 @@
+<h2>Look for new music</h2>
+<div class="search-container">
+  <form class="form-inline">
+    <div class="form-group">
+      <i class="fa fa-search"></i>
+      <input class="search-input" type="text" placeholder="Search.." [formControl]="searchField" name="search">
+    </div>
+  </form>
+</div>
+<div class="scroll-list">
+  <div *ngFor="let provider of availableProviders">
+    <h3 class="search-result-title">{{provider}}</h3>
+    <div *ngIf="searchResults[provider]?.length > 0" class="sub-search-results">
+      <table>
+        <tr>
+          <th></th>
+          <th>Name</th>
+          <th>Artist</th>
+          <th>Album</th>
+          <th></th>
+        </tr>
+        <tr *ngFor="let result of searchResults[provider]" [ngClass]="{selectedTrack: result.id === (selectedTrackId || playingTrackId)}"
+          class="table-row" (click)="changeTrack(result)">
+          <td>
+            <div class="album-img-container" (click)="playTrack($event, result)">
+              <img src="{{result.imagesurl}}" class="album-img">
+              <div class="overlay">
+                <span *ngIf="playingTrackId !== result.id; else pauseBlock" class="icon fa fa-play-circle fa-2x"></span>
+                <ng-template #pauseBlock>
+                  <span class="icon fa fa-pause-circle fa-2x"></span>
+                </ng-template>
+              </div>
+              </img>
+            </div>
+          </td>
+          <td>{{result.name}}</td>
+          <td>{{result.artist}}</td>
+          <td>{{result.album}}</td>
+          <td>
+            <div class="add-track-container">
+              <span class="fa fa-plus fa-lg" (click)="openDropdown($event, result)"></span>
+              <ul *ngIf="result.id === selectedTrackId && showPlaylistDropdown">
+                <li *ngFor="let playlist of playlists" (click)="addToPlaylist($event, playlist, result)">{{playlist.name}}</li>
+              </ul>
+            </div>
+          </td>
+        </tr>
+      </table>
+    </div>
+    <div *ngIf="searchResults[provider]?.length === 0" class="sub-search-results">
+      <span class="no-search-results">No results found</span>
+    </div>
+  </div>
+</div>

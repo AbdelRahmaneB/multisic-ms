@@ -15,7 +15,7 @@ import { GatewayAppRoutingModule} from './app-routing.module';
 import { GatewayHomeModule } from './home/home.module';
 import { GatewayAdminModule } from './admin/admin.module';
 import { GatewayAccountModule } from './account/account.module';
-import { GatewayEntityModule } from './entities/entity.module';
+import { MultisicMusicViewModule } from './entities/musicView.module';
 import { PaginationConfig } from './blocks/config/uib-pagination.config';
 // jhipster-needle-angular-add-module-import JHipster will add new module here
 import {
@@ -36,7 +36,7 @@ import {
         GatewayHomeModule,
         GatewayAdminModule,
         GatewayAccountModule,
-        GatewayEntityModule,
+        MultisicMusicViewModule,
         // jhipster-needle-angular-add-module JHipster will add new module here
     ],
     declarations: [

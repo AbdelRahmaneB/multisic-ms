@@ -1,0 +1,47 @@
+<div class="title">
+  <h2>{{playlist?.name}}</h2>
+  <div>
+    <button class="btn btn-custom float-right" (click)="browseMusic()">
+      <span class="fa fa-plus"></span>
+      <span>
+        Add Music
+      </span>
+    </button>
+  </div>
+</div>
+<div class="scroll-list">
+  <div *ngIf="playlist?.tracks && playlist?.tracks.length > 0">
+    <table class="track-list">
+      <tr>
+        <th></th>
+        <th>Name</th>
+        <th>Artist</th>
+        <th>Album</th>
+        <th></th>
+      </tr>
+      <tr *ngFor="let track of playlist?.tracks" [ngClass]="{selectedTrack: track?.id === selectedTrackId}" class="table-row" (click)="changeSong(track)">
+        <td>
+          <div class="album-img-container" (click)="playTrack($event, track)">
+            <img src="{{track.imagesurl}}" class="album-img">
+            <div class="overlay">
+              <span *ngIf="playingTrackId !== track.id; else pauseBlock" class="icon fa fa-play-circle fa-2x"></span>
+              <ng-template #pauseBlock>
+                <span class="icon fa fa-pause-circle fa-2x"></span>
+              </ng-template>
+            </div>
+            </img>
+          </div>
+        </td>
+        <td>{{track?.name ? track.name : 'Unknown'}}</td>
+        <td>{{track?.artist ? track.artist : 'Unknown'}}</td>
+        <td>{{track?.album ? track.album: 'Unknown'}}</td>
+        <td>
+          <span class="fa fa-trash fa-lg" (click)="removeFromPlaylist($event, track)"></span>
+        </td>
+      </tr>
+    </table>
+  </div>
+  <div *ngIf="playlist?.tracks.length === 0" class="empty-list">
+    <span>No tracks found in {{playlist?.name}} playlist</span>
+  </div>
+</div>

@@ -1,12 +1,6 @@
 <div>
     <h2>
         <span>Tracks</span>
-        <button class="btn btn-primary float-right jh-create-entity create-track" [routerLink]="['/', { outlets: { popup: ['track-new'] } }]">
-            <span class="fa fa-plus"></span>
-            <span >
-            Create new Track
-            </span>
-        </button>
     </h2>
     <jhi-alert></jhi-alert>
     <div class="row">
@@ -15,51 +9,57 @@
     <div class="table-responsive" *ngIf="tracks">
         <table class="table table-striped">
             <thead>
-            <tr>
-            <th><span>ID</span></th>
-            <th><span>Name</span></th>
-            <th><span>Album</span></th>
-            <th><span>Artist</span></th>
-            <th><span>Imagesurl</span></th>
-            <th><span>Previewurl</span></th>
-            <th></th>
-            </tr>
+                <tr>
+                    <th>
+                        <span>ID</span>
+                    </th>
+                    <th>
+                        <span>Name</span>
+                    </th>
+                    <th>
+                        <span>Album</span>
+                    </th>
+                    <th>
+                        <span>Artist</span>
+                    </th>
+                    <th>
+                        <span>Imagesurl</span>
+                    </th>
+                    <th>
+                        <span>Previewurl</span>
+                    </th>
+                    <th></th>
+                </tr>
             </thead>
             <tbody>
-            <tr *ngFor="let track of tracks ;trackBy: trackId">
-                <td><a [routerLink]="['../track', track.id ]">{{track.id}}</a></td>
-                <td>{{track.name}}</td>
-                <td>{{track.album}}</td>
-                <td>{{track.artist}}</td>
-                <td>{{track.imagesurl}}</td>
-                <td>{{track.previewurl}}</td>
-                <td class="text-right">
-                    <div class="btn-group flex-btn-group-container">
-                        <button type="submit"
-                                [routerLink]="['../track', track.id ]"
-                                class="btn btn-info btn-sm">
-                            <span class="fa fa-eye"></span>
-                            <span class="d-none d-md-inline">View</span>
-                        </button>
-                        <button type="submit"
-                                [routerLink]="['/', { outlets: { popup: 'track/'+ track.id + '/edit'} }]"
-                                replaceUrl="true"
-                                queryParamsHandling="merge"
-                                class="btn btn-primary btn-sm">
-                            <span class="fa fa-pencil"></span>
-                            <span class="d-none d-md-inline">Edit</span>
-                        </button>
-                        <button type="submit"
-                                [routerLink]="['/', { outlets: { popup: 'track/'+ track.id + '/delete'} }]"
-                                replaceUrl="true"
-                                queryParamsHandling="merge"
+                <tr *ngFor="let track of tracks ;trackBy: trackId">
+                    <td>
+                        <a [routerLink]="['../track', track.id ]">{{track.id}}</a>
+                    </td>
+                    <td>{{track.name}}</td>
+                    <td>{{track.album}}</td>
+                    <td>{{track.artist}}</td>
+                    <td>{{track.imagesurl}}</td>
+                    <td>{{track.previewurl}}</td>
+                    <td class="text-right">
+                        <div class="btn-group flex-btn-group-container">
+                            <button type="submit" [routerLink]="['../track', track.id ]" class="btn btn-info btn-sm">
+                                <span class="fa fa-eye"></span>
+                                <span class="d-none d-md-inline">View</span>
+                            </button>
+                            <button type="submit" [routerLink]="['/', { outlets: { popup: 'track/'+ track.id + '/edit'} }]" replaceUrl="true" queryParamsHandling="merge"
+                                class="btn btn-custom btn-sm">
+                                <span class="fa fa-pencil"></span>
+                                <span class="d-none d-md-inline">Edit</span>
+                            </button>
+                            <button type="submit" [routerLink]="['/', { outlets: { popup: 'track/'+ track.id + '/delete'} }]" replaceUrl="true" queryParamsHandling="merge"
                                 class="btn btn-danger btn-sm">
-                            <span class="fa fa-remove"></span>
-                            <span class="d-none d-md-inline">Delete</span>
-                        </button>
-                    </div>
-                </td>
-            </tr>
+                                <span class="fa fa-remove"></span>
+                                <span class="d-none d-md-inline">Delete</span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
             </tbody>
         </table>
     </div>

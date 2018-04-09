@@ -16,9 +16,9 @@ module.exports = webpackMerge(commonConfig({ env: ENV }), {
         contentBase: './target/www',
         proxy: [{
             context: [
-                '/multisic',
-                '/music',
                 /* jhipster-needle-add-entity-to-webpack - JHipster will add entity api paths here */
+                '/music-provider',
+                '/music',
                 '/api',
                 '/management',
                 '/swagger-resources',

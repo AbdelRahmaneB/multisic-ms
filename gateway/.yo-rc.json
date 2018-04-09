@@ -1,13 +1,13 @@
 {
   "generator-jhipster": {
     "promptValues": {
-      "packageName": "ca.polymtl.log8430.multisic",
+      "packageName": "ca.polymtl.log8430.multisic.gateway",
       "microservicePath": "../music"
     },
-    "jhipsterVersion": "4.14.0",
+    "jhipsterVersion": "4.14.1",
     "baseName": "gateway",
-    "packageName": "ca.polymtl.log8430.multisic",
-    "packageFolder": "ca/polymtl/log8430/multisic",
+    "packageName": "ca.polymtl.log8430.multisic.gateway",
+    "packageFolder": "ca/polymtl/log8430/multisic/gateway",
     "serverPort": "8090",
     "authenticationType": "jwt",
     "cacheProvider": "hazelcast",
@@ -22,7 +22,7 @@
     "buildTool": "maven",
     "enableSocialSignIn": false,
     "enableSwaggerCodegen": false,
-    "jwtSecretKey": "b34827da154b7cfe39447ba1ca40456770224a46",
+    "jwtSecretKey": "a4b86d528571bbdb28dda6bc1f635fc8a223d728",
     "clientFramework": "angularX",
     "useSass": false,
     "clientPackageManager": "yarn",
