@@ -1,0 +1,39 @@
+.playlists {
+    display: flex;
+}
+
+.nav-section {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 50px;
+}
+
+.fa-search {
+    color: #26272a;
+}
+
+.playlist-action-button {
+    visibility: hidden;
+}
+
+.playlist {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    font-size: 18px;
+}
+.playlistSelected button {
+    visibility: visible;
+}
+.playlist:hover button {
+    visibility: visible;
+}
+
+.fa-list-ul {
+    padding: 0 8px;
+}
+
+.bottom-margin {
+    margin-bottom: 10px;
+}

@@ -2,7 +2,7 @@ import { BaseEntity } from './../../shared';
 
 export class Track implements BaseEntity {
     constructor(
-        public id?: number,
+        public id?: string,
         public name?: string,
         public album?: string,
         public artist?: string,

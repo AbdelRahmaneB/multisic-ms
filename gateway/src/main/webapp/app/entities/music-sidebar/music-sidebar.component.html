@@ -1,0 +1,53 @@
+<div>
+    <h2 class="nav-section">
+        <div>
+            <span>Your music</span>
+        </div>
+        <div>
+            <!--TODO change router to open search component-->
+            <div [ngClass]="{ selectedLink: !selectedPlaylist }" class="menu-button text-left" (click)="browseMusic()">
+                <span class="fa fa-search"></span>
+                <span class="text">
+                    Look for new music
+                </span>
+            </div>
+        </div>
+    </h2>
+    <h2 class="bottom-margin">
+        <span>Playlists</span>
+        <button class="btn btn-custom float-right jh-create-entity create-play-list" [routerLink]="['/', { outlets: { popup: ['play-list-new'] } }]">
+            <span class="fa fa-plus"></span>
+            <span>
+                New Playlist
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <div class="row">
+    </div>
+    <br/>
+    <div class="table-responsive" *ngIf="playLists">
+        <div class="playlists" *ngFor="let playList of playLists ;trackBy: trackId">
+            <div [ngClass]="{selectedLink: selectedPlaylist === playList.id, playlist: true}" class="menu-button" (click)=selectPlaylist(playList.id)>
+                <div>
+                    <span class="fa fa-list-ul"></span>
+                    <span class="text">{{playList.name}}</span>
+                </div>
+                <div class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit" [routerLink]="['/', { outlets: { popup: 'play-list/'+ playList.id + '/edit'} }]" replaceUrl="true"
+                            queryParamsHandling="merge" class="btn btn-custom btn-sm playlist-action-button">
+                            <span class="fa fa-pencil"></span>
+                            <span class="d-none d-md-inline">Edit</span>
+                        </button>
+                        <button type="submit" [routerLink]="['/', { outlets: { popup: 'play-list/'+ playList.id + '/delete'} }]" replaceUrl="true"
+                            queryParamsHandling="merge" class="btn btn-danger btn-sm playlist-action-button">
+                            <span class="fa fa-remove"></span>
+                            <span class="d-none d-md-inline">Delete</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

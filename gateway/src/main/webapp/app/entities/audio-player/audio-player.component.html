@@ -1,0 +1,25 @@
+<div class="audio-player">
+  <div *ngIf="audioPlayerTrack" class="track-info">
+    <img src="{{audioPlayerTrack.imagesurl}}" class="album-img"></img>
+    <div *ngIf="isPlaylistPlaying || !isSelected" class="pad">
+      <span class="fa fa-backward" (click)="previousTrack()"></span>
+    </div>
+    <div class="pad">
+      <span class="revert-text">{{displayTrackInfo(audioPlayerTrack.name)}}</span>
+    </div>
+    <div class="divider"></div>
+    <div class="pad">
+      <span class="revert-text">{{displayTrackInfo(audioPlayerTrack.artist)}}</span>
+    </div class="pad">
+    <div class="divider"></div>
+    <div class="pad">
+      <span class="revert-text">{{displayTrackInfo(audioPlayerTrack.album)}}</span>
+    </div>
+    <div *ngIf="isPlaylistPlaying || !isSelected" class="pad">
+      <span class="fa fa-forward" (click)="nextTrack()"></span>
+    </div>
+  </div>
+  <audio #audio id="singleAudio" preload="auto" controls on-ended="playNextSong()" on-play="onPlay()" on-pause="onPause()">
+    <source src="" type="audio/mpeg">
+  </audio>
+</div>
