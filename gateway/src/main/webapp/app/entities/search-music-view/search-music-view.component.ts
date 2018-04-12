@@ -6,7 +6,7 @@ import {
     Output,
     EventEmitter,
     ElementRef,
-    HostListener
+    HostListener,
 } from '@angular/core';
 import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
 import { FormControl } from '@angular/forms';
@@ -65,7 +65,7 @@ export class SearchMusicViewComponent implements OnInit, OnDestroy {
 
         this.subscribers.playPauseTrack = musicViewService
             .getPlayingTrackIdEvent()
-            .subscribe((id) => {
+            .subscribe(id => {
                 this.playingTrackId = id;
             });
     }
@@ -80,22 +80,22 @@ export class SearchMusicViewComponent implements OnInit, OnDestroy {
             .debounceTime(400)
             .distinctUntilChanged()
             .do(() => (this.loading = true))
-            .map((term) => {
+            .map(term => {
                 if (term) {
-                    this.availableProviders.map((provider) => {
+                    this.availableProviders.map(provider => {
                         this.searchMusicService
                             .query({
                                 query: term,
                                 provider,
                             })
                             .do(() => (this.loading = false))
-                            .subscribe((results) => {
+                            .subscribe(results => {
                                 this.searchResults[provider] = results;
                                 this.loading = false;
                             });
                     });
                 } else {
-                    this.availableProviders.map((provider) => {
+                    this.availableProviders.map(provider => {
                         this.searchResults[provider] = [];
                     });
                 }
@@ -109,7 +109,7 @@ export class SearchMusicViewComponent implements OnInit, OnDestroy {
     }
 
     loadAllProviders() {
-        this.searchMusicService.queryProviders().then((res) => {
+        this.searchMusicService.queryProviders().then(res => {
             this.availableProviders = res.body;
             this.initSearch();
         });
@@ -125,7 +125,7 @@ export class SearchMusicViewComponent implements OnInit, OnDestroy {
     }
 
     initSearch() {
-        this.availableProviders.forEach((provider) => {
+        this.availableProviders.forEach(provider => {
             this.searchResults[provider] = [];
         });
     }
@@ -133,7 +133,7 @@ export class SearchMusicViewComponent implements OnInit, OnDestroy {
     registerChangeInPlayLists() {
         this.subscribers.eventManager = this.eventManager.subscribe(
             'playListListModification',
-            (response) => this.loadAllPlaylists()
+            response => this.loadAllPlaylists()
         );
     }
 
@@ -175,7 +175,7 @@ export class SearchMusicViewComponent implements OnInit, OnDestroy {
     addToPlaylist(e, playlist, track) {
         this.showPlaylistDropdown = false;
 
-        if (!playlist.tracks.find((t) => t.id === track.id)) {
+        if (!playlist.tracks.find(t => t.id === track.id)) {
             // Create own unique id
             const trackWithoutId = Object.assign({}, track);
             delete trackWithoutId.id;
@@ -185,6 +185,13 @@ export class SearchMusicViewComponent implements OnInit, OnDestroy {
             );
         }
         e.stopPropagation();
+    }
+
+    deleteTrackFromPlaylist(playlistId, track) {
+        let index = this.playlists.findIndex(p => p.id === playlistId);
+        this.playlists[index].tracks = this.playlists[index].tracks.filter(
+            t => t.id !== track.id
+        );
     }
 
     private subscribeToTrackResponse(

@@ -48,7 +48,7 @@ export class MusicViewComponent implements OnInit, OnDestroy {
 
     ngOnInit() {
         this.loadAll();
-        this.principal.identity().then((account) => {
+        this.principal.identity().then(account => {
             this.currentAccount = account;
         });
         this.registerChangeInPlayLists();
@@ -61,7 +61,7 @@ export class MusicViewComponent implements OnInit, OnDestroy {
     registerChangeInPlayLists() {
         this.eventSubscriber = this.eventManager.subscribe(
             'playListListModification',
-            (response) => this.loadAll()
+            response => this.loadAll()
         );
     }
 
@@ -71,7 +71,7 @@ export class MusicViewComponent implements OnInit, OnDestroy {
         }
 
         this.selectedPlaylist = this.playLists.find(
-            (item) => item.id === playlistId
+            item => item.id === playlistId
         );
     }
 
@@ -90,6 +90,13 @@ export class MusicViewComponent implements OnInit, OnDestroy {
         this.selectedPlaylist = null;
         this.musicSidebarView.selectedPlaylist = null;
         this.isSearchMusicSelected = searchMusic;
+    }
+
+    deleteTrackFromPlaylist(track) {
+        this.searchMusicView.deleteTrackFromPlaylist(
+            this.selectedPlaylist.id,
+            track
+        );
     }
 
     private onError(error) {
