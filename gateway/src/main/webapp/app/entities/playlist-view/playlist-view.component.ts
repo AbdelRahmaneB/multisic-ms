@@ -33,7 +33,7 @@ export class PlaylistViewComponent implements OnInit, OnDestroy {
     ) {
         this.subscribers.playPauseTrack = musicViewService
             .getPlayingTrackIdEvent()
-            .subscribe(id => {
+            .subscribe((id) => {
                 if (id) {
                     this.selectedTrackId = id;
                 }
@@ -79,11 +79,11 @@ export class PlaylistViewComponent implements OnInit, OnDestroy {
         }
         this.deleteTrack.emit(track);
         this.playlist.tracks = this.playlist.tracks.filter(
-            t => t.id !== track.id
+            (t) => t.id !== track.id
         );
 
         // Without a subscribe call, Observer do nothing, so we put and empty subscribe
-        this.playListService.update(this.playlist).subscribe(res => {
+        this.playListService.update(this.playlist).subscribe((res) => {
             this.playlist = res.body;
         });
         e.stopPropagation();
