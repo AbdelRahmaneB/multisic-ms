@@ -6,3 +6,6 @@
 4- Dans un autre terminal `cd music-provider && ./mvnw`
 5- Accédez à localhost:8090
 
+**Si vous avez des problème d'accès pour exécuter la commande ./mvnw veuillez changer les accès avec la commande:
+`chmod +x *`
+
