@@ -21,6 +21,7 @@ export class PlaylistViewComponent implements OnInit, OnDestroy {
     @Input() playlist: PlayList;
     @Output() newTrack = new EventEmitter<Track>();
     @Output() getIsSearchMusic = new EventEmitter<boolean>();
+    @Output() deleteTrack = new EventEmitter<Track>();
 
     subscribers: any = {};
     selectedTrackId: string = null;
@@ -76,12 +77,15 @@ export class PlaylistViewComponent implements OnInit, OnDestroy {
             this.playingTrackId = null;
             this.musicViewService.removeTrack();
         }
+        this.deleteTrack.emit(track);
         this.playlist.tracks = this.playlist.tracks.filter(
             (t) => t.id !== track.id
         );
 
         // Without a subscribe call, Observer do nothing, so we put and empty subscribe
-        this.playListService.update(this.playlist).subscribe((r) => {});
+        this.playListService.update(this.playlist).subscribe((res) => {
+            this.playlist = res.body;
+        });
         e.stopPropagation();
     }
 

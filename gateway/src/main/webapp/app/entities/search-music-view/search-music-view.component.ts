@@ -6,7 +6,7 @@ import {
     Output,
     EventEmitter,
     ElementRef,
-    HostListener
+    HostListener,
 } from '@angular/core';
 import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
 import { FormControl } from '@angular/forms';
@@ -185,6 +185,13 @@ export class SearchMusicViewComponent implements OnInit, OnDestroy {
             );
         }
         e.stopPropagation();
+    }
+
+    deleteTrackFromPlaylist(playlistId, track) {
+        const index = this.playlists.findIndex((p) => p.id === playlistId);
+        this.playlists[index].tracks = this.playlists[index].tracks.filter(
+            (t) => t.id !== track.id
+        );
     }
 
     private subscribeToTrackResponse(

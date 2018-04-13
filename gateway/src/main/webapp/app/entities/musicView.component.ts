@@ -92,6 +92,13 @@ export class MusicViewComponent implements OnInit, OnDestroy {
         this.isSearchMusicSelected = searchMusic;
     }
 
+    deleteTrackFromPlaylist(track) {
+        this.searchMusicView.deleteTrackFromPlaylist(
+            this.selectedPlaylist.id,
+            track
+        );
+    }
+
     private onError(error) {
         this.jhiAlertService.error(error.message, null, null);
     }
